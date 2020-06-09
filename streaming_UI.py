@@ -1,4 +1,4 @@
-from PideValor import PideValor as PV
+from Pide import Pide as Pide
 
 class menu_streaming_UI():
     
@@ -16,7 +16,7 @@ class menu_streaming_UI():
         print("10) Salir")
 
 
-        pv= PV("Indica la opción deseada",1,10,"int")
-        op = pv.pide_numero()
+        Pide= Pide("Indica la opción deseada",1,10,"int")
+        op = Pide.pide_numero()
 
         return(op)
