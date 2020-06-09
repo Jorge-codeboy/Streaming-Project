@@ -1,4 +1,4 @@
-class Pv():
+class Pide():
     def __init__(self, letrero, li = 0, ls = 0, ciclo = "", tipo = ""):
         self.letrero = letrero
         self.li = li
@@ -13,7 +13,7 @@ class Pv():
         print(self.letrero)
         input()
 
-    def pide_cadena(self):
+    def como_cadena(self):
         if (self.ciclo == "SI") and ((self.li != 0) or (self.ls != 0)):
             while True:
                 cad = input(self.letrero)
@@ -21,7 +21,7 @@ class Pv():
                     mensaje_error = "Error la cadena debe estar entre " + str(self.li) + " y " + str(self.ls) + " caracteres . . ." 
 
                     # Creates an object with error message
-                    mer = PideValor(mensaje_error)
+                    mer = Pide(mensaje_error)
                     mer.error()
                     del mer
                 else:
@@ -31,13 +31,13 @@ class Pv():
             cad = input(self.letrero)
             return cad
 
-    def pide_numero(self):
+    def como_numero(self):
          while True:
             cad = input(self.letrero)
             if not cad.isnumeric():
                 mensaje_error = "Error solo deben ser digitos numéricos . . ." 
                 # Creates an object with error message
-                mer = PideValor(mensaje_error)
+                mer = Pide(mensaje_error)
                 mer.error()
                 del mer
             else:
@@ -46,17 +46,17 @@ class Pv():
                 if (self.ls != 0 and self.li != 0 and self.ciclo == "SI"):
                     if num < self.li or num > self.ls:
                         mensaje_error =  mensaje_error = "Error la cadena debe estar entre " + str(self.li) + " y " + str(self.ls)
-                        mer = PideValor(mensaje_error)
+                        mer = Pide(mensaje_error)
                         mer.error()
                         del mer
                     else: return num
                 else: return num
 
-# Termina la clase PideValor
+# Termina la clase Pide
 
-#Pv1 = PideValor("Indica tu nombre : ", ciclo = "si", li = 3, ls = 10)
-#cad = Pv1.pide_cadena()
+#Pide1 = Pide("Indica tu nombre : ", ciclo = "si", li = 3, ls = 10)
+#cad = Pide1.pide_cadena()
 #print("Cadena =", cad)
-#pn1 = PideValor("Indica un número : ", tipo = "int", li = 5, ls = 10, ciclo = "si")
+#pn1 = Pide("Indica un número : ", tipo = "int", li = 5, ls = 10, ciclo = "si")
 #x = pn1.pide_numero()
 #print("x=",x)
