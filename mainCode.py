@@ -6,14 +6,12 @@ class Videos():
         self.titu = titu
         self.dura = dura
         self.cali = cali
-        print("VID!: ")
 
     def pide_datos(self):
         self.ID = validacion.Pide("Indica el ID > ", 5, 5, "SI", "").como_cadena()
         self.titu = validacion.Pide("---Indica el titulo     > ", 1, 30, "SI", "").como_cadena()
         self.dura = validacion.Pide("---Indica la duración   > ", 1, 500, "SI", "int").como_numero()
         self.cali = validacion.Pide("---Indica la calificacion> ", 1, 5, "SI", "int").como_numero()
-        print("TERMINÉ")
         print(self.ID)
         
     def muestra(self):
@@ -48,7 +46,6 @@ class Serie(Peliculas):
         self.epis = epis
         self.titE = titE
         super().__init__(ID, titu, dura, cali, audi, gene)
-        #Peliculas.pide_datos()
 
     def pide_datos(self):
         super().pide_datos()
@@ -69,7 +66,6 @@ class Documental(Serie):
 
     def __init__(self, ID, titu, dura, cali, audi, gene, temp, epis, titE, tema):
         self.tema = tema
-        #print("TEMA: ", tema)
         super().__init__(ID, titu, dura, cali, audi, gene, temp, epis, titE)
 
     def pide_datos(self):
