@@ -10,15 +10,15 @@ class Pide():
         pass
 
     def error(self):
-        print(self.letrero)
-        input()
+        print('\n' + " [!!!] ERROR [!!!]")
+        print(" " +self.letrero + ". . . " + '\n' + " Intente de nuevo." + '\n')
 
     def como_cadena(self):
         if (self.ciclo == "SI") and ((self.li != 0) or (self.ls != 0)):
             while True:
                 cad = input(self.letrero)
                 if len(cad) < self.li or len(cad) > self.ls:
-                    mensaje_error = "Error la cadena debe estar entre " + str(self.li) + " y " + str(self.ls) + " caracteres . . ." 
+                    mensaje_error = "La cadena debe estar entre " + str(self.li) + " y " + str(self.ls) + " caracteres." 
 
                     # Creates an object with error message
                     mer = Pide(mensaje_error)
@@ -35,7 +35,7 @@ class Pide():
          while True:
             cad = input(self.letrero)
             if not cad.isnumeric():
-                mensaje_error = "Error solo deben ser digitos numéricos . . ." 
+                mensaje_error = "Solo deben ser digitos numéricos . . ." 
                 # Creates an object with error message
                 mer = Pide(mensaje_error)
                 mer.error()
@@ -45,7 +45,7 @@ class Pide():
                 else: num = float(cad)
                 if (self.ls != 0 and self.li != 0 and self.ciclo == "SI"):
                     if num < self.li or num > self.ls:
-                        mensaje_error =  mensaje_error = "Error la cadena debe estar entre " + str(self.li) + " y " + str(self.ls)
+                        mensaje_error =  mensaje_error = "El número debe estar entre " + str(self.li) + " y " + str(self.ls)
                         mer = Pide(mensaje_error)
                         mer.error()
                         del mer
