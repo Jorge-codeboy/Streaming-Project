@@ -1,8 +1,9 @@
 from PideValor import PideValor as PV
 
-class lista_alumnos_UI:
+class menu_streaming_UI():
     
-    def menu():
+    def menu(self):
+
         print("1) agregar videos")
         print("2) consulta por ID")
         print("3) consulta por Título")
@@ -17,5 +18,5 @@ class lista_alumnos_UI:
 
         pv= PV("Indica la opción deseada",1,10,"int")
         op = pv.pide_numero()
-        
+
         return(op)
