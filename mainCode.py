@@ -1,9 +1,10 @@
-from PideValor import PideValor as PV
+from PideValor import *
 
-class Video():
+Pv.pide_cadena()
+
+class Videos():
 
     def __init__(self,ID,titulo,duracion,calif):
-
 
         self.ID = ID
         self.titulo = titulo
@@ -18,22 +19,25 @@ class Video():
         print("Calificación    : ",self.calif)
 
     def pide_datos(self):
-        pv = PV(" indica el ID : ",0,5,"SI","")
-        ID = pv.pide_cadena()
+        #ID =Pv.pide_cadena((" indica el ID : ",0,5,"SI",""))
+
+        ID = Pv(" indica el ID : ",0,5,"SI","").pide_cadena()
+        
+        
+        #Pv.ciclo("Indica el ID ", 0, 5, "SI", "")
 
 
-        pv = PV(" indica el titulo : ",0,30,"SI","")
-        titulo = pv.pide_cadena()
+        Pv = Pv(" indica el titulo : ",0,30,"SI","")
+        titulo = Pv.pide_cadena()
 
-        pv = PV(" indica la duración : ",1,500,"SI","")
-        duracion = pv.pide_numero()
+        Pv = Pv(" indica la duración : ",1,500,"SI","")
+        duracion = Pv.pide_numero()
 
     
-        pv = PV(" indica la calificacion : ",1,5,"SI","")
-        calificacion = pv.pide_numero()
-              
+        Pv = Pv(" indica la calificacion : ",1,5,"SI","")
+        calificacion = Pv.pide_numero()
 
-class Pelicula(Video):
+class Peliculas(Videos):
 
     def __init__(self, ID, titulo, duracion, calif,audiencia,genero):
         super().__init__(ID, titulo, duracion, calif)
@@ -52,14 +56,13 @@ class Pelicula(Video):
     def pide_datos(self):
         return super().pide_datos()
 
-        pv = PV(" indica la audiencia : ",0,15,"SI","")
-        audiencia = pv.pide_cadena()
+        Pv = Pv(" indica la audiencia : ",0,15,"SI","")
+        audiencia = Pv.pide_cadena()
 
-        pv = PV(" indica el género : ",0,15,"SI","")
-        genero = pv.pide_cadena()        
+        Pv = Pv(" indica el género : ",0,15,"SI","")
+        genero = Pv.pide_cadena()        
         
-
-class Serie(Pelicula):
+class Serie(Peliculas):
 
     def __init__(self, ID, titulo, duracion, calif, audiencia, genero,temporada,ep,tit_ep):
         super().__init__(ID, titulo, duracion, calif, audiencia, genero)
@@ -80,14 +83,15 @@ class Serie(Pelicula):
     def pide_datos(self):
         return super().pide_datos()
 
-        pv = PV(" indica el episodio : ",15,500,"SI","")
-        ep = pv.pide_numero()     
+        ep = Pv.pide_numero(" indica el episodio : ",15,500,"SI","")
 
-        pv = PV(" indica la temporada: ",1,500,"SI","")
-        temporada = pv.pide_numero()       
+        Pv = Pv.pide_numero(" indica la temporada: ",1,500,"SI","")
+        temporada = Pv.pide_numero()       
 
-        pv = PV(" indica el título del episodio ",1,30,"SI","")
-        tit_ep = pv.pide_numero()  
+        Pv = Pv.pide_numero(" indica el título del episodio ",1,30,"SI","")
+        tit_ep = Pv.pide_numero()  
+
+
 class Documental(Serie):
 
     def __init__(self, ID, titulo, duracion, calif, audiencia, genero, temporada, ep, tit_ep,tema):
@@ -103,8 +107,8 @@ class Documental(Serie):
 
     def pide_datos(self):
         return super().pide_datos()
-        pv = PV(" indica el tema ",1,30,"SI","")
-        tema = pv.pide_numero()  
+        Pv = Pv(" indica el tema ",1,30,"SI","")
+        tema = Pv.pide_numero()  
 
 class Archivo():
 

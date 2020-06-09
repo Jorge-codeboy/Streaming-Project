@@ -1,4 +1,4 @@
-class PideValor():
+class Pv():
     def __init__(self, letrero, li = 0, ls = 0, ciclo = "", tipo = ""):
         self.letrero = letrero
         self.li = li
@@ -54,8 +54,8 @@ class PideValor():
 
 # Termina la clase PideValor
 
-#pv1 = PideValor("Indica tu nombre : ", ciclo = "si", li = 3, ls = 10)
-#cad = pv1.pide_cadena()
+#Pv1 = PideValor("Indica tu nombre : ", ciclo = "si", li = 3, ls = 10)
+#cad = Pv1.pide_cadena()
 #print("Cadena =", cad)
 #pn1 = PideValor("Indica un número : ", tipo = "int", li = 5, ls = 10, ciclo = "si")
 #x = pn1.pide_numero()
