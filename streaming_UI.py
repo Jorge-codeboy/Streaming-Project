@@ -5,7 +5,7 @@ import streaming_AD as ad
 import mainCode as mc
 
 
-class menu_streaming_UI():
+class listados():
     
     def menu(self):
 
