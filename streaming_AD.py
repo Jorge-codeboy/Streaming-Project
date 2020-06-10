@@ -1,7 +1,7 @@
 import csv
 from csv import reader
 
-class lista_videos_AD():
+class archivo():
 
 
     videos =[]
@@ -14,7 +14,7 @@ class lista_videos_AD():
 
                 self.videos.append(row)
 
-    def grabar_video(self,video):
+    def graba(self,video):
 
         self.videos.append(video)
 
@@ -25,24 +25,32 @@ class lista_videos_AD():
 
                 writer.writerow(video)
 
-    def existe_video(self,video):
+    def busca(self,atributo):
+
+        
 
         bandera_existe = False
 
-        with open('videos.csv', 'r') as file:
 
-            reader = csv.reader(file)
+        for video in self.videos:
 
-            for row in reader:
+            index = 1
 
-                if row[0]==video[0]:
-                    bandera_existe = True
+            if atributo in video:
+                bandera_existe= True
+                index == self.videos.index(video)
+                print(video)
+
+
+
+
+
 
         return(bandera_existe)
 
 
 
-
+archivo().busca("blanca")
 
         
 
