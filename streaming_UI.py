@@ -2,18 +2,19 @@ import validacion
 
 import streaming_AD as ad
 
-import mainCode as mc
+#import mainCode as mc
 
 import winsound as ws
 
 class listados():
-    
+
     def menu(self):
+
         while True:
             ws.PlaySound("somebody", ws.SND_ASYNC)
 
             print('''
-######################################################
+###############################################
              __     _    __ _ _       
           /\ \ \___| |_ / _| (_)_  __ 
          /  \/ / _ \ __| |_| | \ \/ / 
@@ -33,11 +34,13 @@ class listados():
     8) Listado de Documentales
     9) Listado por Calificaciones
 
-###################################################### ''')
+############################################### ''')
 
+        
             op = validacion.Pide('\n' + "Tu opción > ", 1, 9,"SI","int").como_numero()
+            return op
 
-            return(op)
+            
 
     def agrega_video(self):
 
