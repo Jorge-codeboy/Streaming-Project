@@ -77,6 +77,8 @@ class Documental(Serie):
         if  self.tema != "":
             print("Tema            : ", self.tema)
 
+    
+
 
 d = Documental("", "", "", "", "", "", "", "", "", "")
 d.pide_datos()
