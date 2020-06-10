@@ -4,27 +4,40 @@ import streaming_AD as ad
 
 import mainCode as mc
 
+import winsound as ws
 
 class listados():
     
     def menu(self):
+        while True:
+            ws.PlaySound("somebody", ws.SND_ASYNC)
 
-        print("1) agregar videos")
-        print("2) consulta por ID")
-        print("3) consulta por Título")
-        print("4) consulta por género")
-        print("5) Listado general")
-        print("6) Listado de películas")
-        print("7) Listado de Series")
-        print("8) Listado de Documentales")
-        print("9) Listado por calificaciones")
-        print("10) Salir")
+            print('''
+######################################################
+             __     _    __ _ _       
+          /\ \ \___| |_ / _| (_)_  __ 
+         /  \/ / _ \ __| |_| | \ \/ / 
+        / /\  /  __/ |_|  _| | |>  <  
+        \_\ \/ \___|\__|_| |_|_/_/\_\ 
+                              
+    1) Agregar Videos
+    2) Consultar Video por ID
 
+    -- R E P O R T E S --
 
-        Pide= validacion.Pide("Indica la opción deseada",1,10,"int")
-        op = Pide.como_numero()
+    3) Consultar Video por Título
+    4) Consultar Video por Género
+    5) Listado General
+    6) Listado de Películas
+    7) Listado de Series
+    8) Listado de Documentales
+    9) Listado por Calificaciones
 
-        return(op)
+###################################################### ''')
+
+            op = validacion.Pide('\n' + "Tu opción > ", 1, 9,"SI","int").como_numero()
+
+            return(op)
 
     def agrega_video(self):
 
@@ -81,3 +94,4 @@ class listados():
     def listado_calificaciones(self):
         
         pass
+
