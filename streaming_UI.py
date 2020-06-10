@@ -1,4 +1,9 @@
-from Pide import Pide as Pide
+import validacion
+
+import streaming_AD as ad
+
+import mainCode as mc
+
 
 class menu_streaming_UI():
     
@@ -16,13 +21,33 @@ class menu_streaming_UI():
         print("10) Salir")
 
 
-        Pide= Pide("Indica la opción deseada",1,10,"int")
-        op = Pide.pide_numero()
+        Pide= validacion.Pide("Indica la opción deseada",1,10,"int")
+        op = Pide.como_numero()
 
         return(op)
 
     def agrega_video(self):
-        
+
+        op = 0
+
+        while op !=4:
+
+            print("1) agregar pelicula")
+            print("2) agregar serie")
+            print("3) agregar Documental")
+            print("4) salir")
+
+            op= validacion.Pide("Indica la opción deseada",1,4,"int").como_numero()
+
+            if op ==1:
+                pass
+
+            if op ==2:
+                pass
+
+            if op ==3:
+                pass
+    
         pass
 
     def consulta_ID(self):

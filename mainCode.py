@@ -21,6 +21,12 @@ class Videos():
             print("Duración        : ", self.dura)
             print("Calificación    : ", self.cali)
 
+    def __str__(self):
+        
+        cad = self.ID +","+ self.titu +","+ self.dura +","+ self.dura +","+ self.cali
+
+        return(cad)
+
 class Peliculas(Videos):
 
     def __init__(self, ID, titu, dura, cali, audi, gene):
@@ -38,6 +44,13 @@ class Peliculas(Videos):
         if self.audi != "" and self.gene != "":
             print("Audiencia       : ", self.audi)
             print("Género          : ", self.gene)
+
+    def __str__(self):
+
+        cad= self.audi +","+ self.gene
+
+        
+        return (super().__str__()+cad)
 
 class Serie(Peliculas):
 
@@ -60,6 +73,13 @@ class Serie(Peliculas):
             print("No. Episodio    : ", self.epis)
             print("Título Episodio : ", self.titE)
 
+    def __str__(self):
+
+        cad= self.temp +","+ self.epis +","+ self.titE
+
+        
+        return (super().__str__()+cad)
+
 
 
 class Documental(Serie):
@@ -77,7 +97,12 @@ class Documental(Serie):
         if  self.tema != "":
             print("Tema            : ", self.tema)
 
-    
+    def __str__(self):
+
+        cad= self.tema
+
+        
+        return (super().__str__()+cad)  
 
 
 d = Documental("", "", "", "", "", "", "", "", "", "")
