@@ -1,11 +1,12 @@
 import validacion
 
 class Videos():
-    def __init__(self, ID, titu, dura, cali):
+    def __init__(self, ID, titu, dura, cali, gene):
         self.ID  = ID
         self.titu = titu
         self.dura = dura
         self.cali = cali
+        self.gene = gene
 
     def pide_datos(self):
         while True:
@@ -35,7 +36,7 @@ class Videos():
 
     def __str__(self):
         
-        cad = self.ID +","+ self.titu +"," + str(self.dura) +","+ str(self.cali) + ","
+        cad = self.ID +","+ self.titu +"," + str(self.gene) + ", " + str(self.dura) +","+ str(self.cali) + ","
 
         return(cad)
 
@@ -44,7 +45,7 @@ class Peliculas(Videos):
     def __init__(self, ID, titu, dura, cali, audi, gene):
         self.audi = audi
         self.gene = gene
-        super().__init__(ID, titu, dura, cali)
+        super().__init__(ID, titu, dura, cali, gene)
 
     def pide_datos(self):
         super().pide_datos()
@@ -60,7 +61,7 @@ class Peliculas(Videos):
 
     def __str__(self):
 
-        cad= self.audi + "," + self.gene + ","
+        cad= self.audi + ","
 
         
         return (super().__str__()+cad)

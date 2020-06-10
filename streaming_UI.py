@@ -1,17 +1,22 @@
+import os
+import time
 import validacion
-
-import streaming_AD as ad
-
-#import mainCode as mc
-
 import winsound as ws
+import streaming_AD as ad
+import streaming_AC as ac
+
 
 class listados():
+
+    def __init__(self):
+        pass
 
     def menu(self):
 
         while True:
+            
             ws.PlaySound("somebody", ws.SND_ASYNC)
+            os.system('cls')
 
             print('''
 ###############################################
@@ -36,36 +41,43 @@ class listados():
     10) Salir
 
 ############################################### ''')
-
         
             op = validacion.Pide('\n' + "Tu opción > ", 1, 10,"SI","int").como_numero()
-            return op
 
-            
+            if op == 1:
+                self.agrega_video()
+            else:
+                quit()
 
     def agrega_video(self):
 
-        op = 0
+        arch = ad.archivo()
+        arch.cargar_csv("testFile.csv")
+        video = ac.Documental("", "", "", "", "", "", "", "", "", "")
+        video.pide_datos()
+        existe = arch.busca(video.ID, 0)
 
-        while op !=4:
+        if not existe:
+            op =validacion.Pide('\n' + " [¿¿¿] ESTÁ SEGURO QUE DESEA AÑADIR " + str(video.ID) + " [???] " +
+            '\n' + "    1 PARA ACEPTAR | 0 PARA ABORTAR" + '\n' + "> ", 0, 1, "", "int").como_numero()
+            
+            if op == 1:
+                video_str = str(video)
+                print(video_str)
+                arch.graba(video_str, "testFile.csv")
+                os.system("cls")
+                print('''
+               \|/ ____ \|/       
+                @~/ .. \~@        
+               /_( \__/ )_\      ¡ R E G I S T R O   E X I T O S O !
+                  \____/    
+                ''')
+                time.sleep(2.5)
+        else:
+            validacion.Pide("El ID se duplica en la base de datos").error()
+            print(" VOLVIENDO AL MENÚ PRINCIPAL . . .")
+            time.sleep(2.5)
 
-            print("1) agregar pelicula")
-            print("2) agregar serie")
-            print("3) agregar Documental")
-            print("4) salir")
-
-            op= validacion.Pide("Indica la opción deseada",1,4,"int").como_numero()
-
-            if op ==1:
-                pass
-
-            if op ==2:
-                pass
-
-            if op ==3:
-                pass
-    
-        pass
 
     def consulta_ID(self):
         
