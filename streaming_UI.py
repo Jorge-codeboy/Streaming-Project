@@ -20,3 +20,39 @@ class menu_streaming_UI():
         op = Pide.pide_numero()
 
         return(op)
+
+    def agrega_video(self):
+        
+        pass
+
+    def consulta_ID(self):
+        
+        pass
+
+    def consulta_titulo(self):
+        
+        pass
+
+    def consulta_genero(self):
+        
+        pass
+
+    def listado_general(self):
+        
+        pass
+
+    def listado_peliculas(self):
+        
+        pass
+
+    def listado_series(self):
+        
+        pass
+
+    def listado_documentales(self):
+        
+        pass
+
+    def listado_calificaciones(self):
+        
+        pass
