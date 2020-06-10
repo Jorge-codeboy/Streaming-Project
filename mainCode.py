@@ -1,185 +1,67 @@
+import os
+import time
 import validacion
+import streaming_DP as dp
 import streaming_UI as ui
+import streaming_AD as ad
 
-class Videos():
-    def __init__(self, ID, titu, dura, cali):
-        self.ID  = ID
-        self.titu = titu
-        self.dura = dura
-        self.cali = cali
+quedarse = True
 
-    def pide_datos(self):
-        while True:
-            ID = validacion.Pide("Indica el ID > ", 5, 5, "SI", "").como_cadena()
-            ID = ID.upper()
+while quedarse:
+    
+    os.system("cls")
+    
+    op = ui.listados().menu()
+    arch = ad.archivo()
+    arch.cargar_csv("testFile.csv")
+    
+    if op == 1:
+        video = dp.Documental("", "", "", "", "", "", "", "", "", "")
+        video.pide_datos()
+        existe = arch.busca(video.ID, 0)
 
-            if ID[0] != "P" and ID[0] != "D" and ID[0] != "S":
-                validacion.Pide("Solo puede iniciar con P (Películas), S (Series) o D (Documentales)").error()
-            elif ID[1] != "A" and ID[1] != "B" and ID[1] != "C" and ID[1] != "D":
-                validacion.Pide("La segunda letra solo puede ser A (Apto para Todos), B (Adolescentes y Adultos) o C (Solo Adulos) o D (Adultos de Alto Criterio)").error()
-            elif (ID[2:6].isnumeric() == False):
-                validacion.Pide("A partir del tercer dígito solo es válido números").error()
-            else:
-                self.ID = ID
-                break
+        if not existe:
+            op =validacion.Pide('\n' + " [¿¿¿] ESTÁ SEGURO QUE DESEA AÑADIR " + str(video.ID) + " [???] " +
+            '\n' + "    1 PARA ACEPTAR | 0 PARA ABORTAR" + '\n' + "> ", 0, 1, "", "int").como_numero()
+            
+            if op == 1:
+                video_str = str(video)
+                print(video_str)
+                arch.graba(video_str, "testFile.csv")
+                os.system("cls")
+                print('''
+               \|/ ____ \|/       
+                @~/ .. \~@        
+               /_( \__/ )_\      ¡ R E G I S T R O   E X I T O S O !
+                  \____/    
+                ''')
+                time.sleep(2.5)
+        else:
+            validacion.Pide("El ID se duplica en la base de datos").error()
+            print(" VOLVIENDO AL MENÚ PRINCIPAL . . .")
+            time.sleep(2.5)
 
-        self.titu = validacion.Pide("---Indica el titulo     > ", 1, 30, "SI", "").como_cadena()
-        self.dura = validacion.Pide("---Indica la duración   > ", 1, 500, "SI", "int").como_numero()
-        self.cali = validacion.Pide("---Indica la calificacion> ", 1, 5, "SI", "int").como_numero()
-        
-    def muestra(self):
-        if self.ID != "" and self.titu != "" and self.dura != "" and self.cali != "":
-            print("ID              : ", self.ID)
-            print("Titulo          : ", self.titu)
-            print("Duración        : ", self.dura)
-            print("Calificación    : ", self.cali)
-
-    def __str__(self):
-        
-        cad = self.ID +","+ self.titu +","+ self.dura +","+ self.dura +","+ self.cali
-
-        return(cad)
-
-class Peliculas(Videos):
-
-    def __init__(self, ID, titu, dura, cali, audi, gene):
-        self.audi = audi
-        self.gene = gene
-        super().__init__(ID, titu, dura, cali)
-
-    def pide_datos(self):
-        super().pide_datos()
-        if self.ID[0] == "P":
-            self.audi = validacion.Pide("---Indica la audiencia > ", 1, 15, "SI", "").como_cadena()
-            self.gene = validacion.Pide("---Indica el género    > ", 1, 15, "SI", "").como_cadena()
-
-    def muestra(self):
-        super().muestra()
-        if self.audi != "" and self.gene != "":
-            print("Audiencia       : ", self.audi)
-            print("Género          : ", self.gene)
-
-    def __str__(self):
-
-        cad= self.audi +","+ self.gene
-
-        
-        return (super().__str__()+cad)
-
-class Serie(Peliculas):
-
-    def __init__(self, ID, titu, dura, cali, audi, gene, temp, epis, titE):
-        self.temp = temp
-        self.epis = epis
-        self.titE = titE
-        super().__init__(ID, titu, dura, cali, audi, gene)
-
-    def pide_datos(self):
-        super().pide_datos()
-        if self.ID[0] == "S":
-            self.temp = validacion.Pide("---Indica la temporada > ", 1, 500, "SI","int").como_numero()
-            self.epis = validacion.Pide("---Indica el episodio > ", 1, 500, "SI","int").como_numero()
-            self.titE = validacion.Pide("---Indica el título del episodio > ", 1, 30,"SI","").como_cadena()
-
-    def muestra(self):
-        super().muestra()
-        if self.temp != "" and self.epis != "" and self.titE != "":
-            print("Temporada       : ", self.temp)
-            print("No. Episodio    : ", self.epis)
-            print("Título Episodio : ", self.titE)
-
-    def __str__(self):
-
-        cad= self.temp +","+ self.epis +","+ self.titE
-
-        
-        return (super().__str__()+cad)
-
-class Documental(Serie):
-
-    def __init__(self, ID, titu, dura, cali, audi, gene, temp, epis, titE, tema):
-        self.tema = tema
-        super().__init__(ID, titu, dura, cali, audi, gene, temp, epis, titE)
-
-    def pide_datos(self):
-        super().pide_datos()
-        if self.ID[0] == "D":
-            self.tema = validacion.Pide("---Indica el tema > ", 1, 30, "SI", "").como_cadena()
-
-    def muestra(self):
-        super().muestra()
-        if  self.tema != "":
-            print("Tema            : ", self.tema)
-
-    def __str__(self):
-
-        cad= self.tema
-
-        
-        return (super().__str__()+cad)  
-
-
-
-op = ui.listados().menu()
-
-if op == 1:
-    video = Documental("", "", "", "", "", "", "", "", "", "")
-    video.pide_datos()
-
-
+    elif op == 2:
+        pass
+    elif op == 3:
+        pass
+    elif op == 4:
+        pass
+    elif op == 5:
+        pass
+    elif op == 6:
+        pass
+    elif op == 7:
+        pass
+    elif op == 8:
+        pass
+    elif op == 9:
+        pass
+    else:
+        quedarse = False
 
 # By ANTONIMOUS
 
 #print('{:.5}'.format('aaabbbccc'))
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
-
-
-
-
-
-
-class Archivo():
-
-    def __init__(self):
-        pass
-
-    def busca(self):
-        pass
-
-    def graba(self):
-        pass
-
-
-class Listados():
-    def __init__(self):
-        pass
-
-
-
-    def general(self):
-        pass
-
-
-'''

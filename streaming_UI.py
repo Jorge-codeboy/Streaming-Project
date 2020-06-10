@@ -33,11 +33,12 @@ class listados():
     7) Listado de Series
     8) Listado de Documentales
     9) Listado por Calificaciones
+    10) Salir
 
 ############################################### ''')
 
         
-            op = validacion.Pide('\n' + "Tu opción > ", 1, 9,"SI","int").como_numero()
+            op = validacion.Pide('\n' + "Tu opción > ", 1, 10,"SI","int").como_numero()
             return op
 
             
