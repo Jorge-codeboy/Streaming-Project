@@ -149,6 +149,7 @@ class listados():
                 print("#####################################################################")
                 print("#__________________________LISTADO DOCUMENTALES_____________________#")
                 print("#####################################################################","\n")
+                
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
         
@@ -179,7 +180,8 @@ class listados():
         arch.cargar_csv("testFile.csv")
         video = ac.Documental("", "", "", "", "", "", "", "", "", "")
         video.pide_datos()
-        existe = arch.busca(video.ID, 0)
+        existe,vid = arch.busca(video.ID, 0)
+        print(existe)
 
         if not existe:
             op =validacion.Pide('\n' + " [¿¿¿] ESTÁ SEGURO QUE DESEA AÑADIR " + str(video.ID) + " [???] " +
