@@ -6,17 +6,19 @@ import streaming_AD as ad
 import streaming_AC as ac
 
 
+
 class listados():
 
     def __init__(self):
         pass
 
     def menu(self):
+        
 
         while True:
             
-            ws.PlaySound("somebody", ws.SND_ASYNC)
-            os.system('cls')
+            #ws.PlaySound("somebody", ws.SND_ASYNC)
+            #os.system('cls')
 
             print('''
 ###############################################
@@ -46,7 +48,91 @@ class listados():
 
             if op == 1:
                 self.agrega_video()
-            else:
+                print("TERMINE")
+
+            elif op == 2:
+                ID = validacion.Pide("indica ID : ",5,5,"SI","").como_cadena()
+
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+
+                bandera,vid = arch.busca(ID,0)
+
+                if bandera == False:
+                    print("no hay video con ese ID")
+                else:
+                    
+                    video = ac.Documental(vid[0],vid[1],vid[3],vid[4],vid[5],vid[2],vid[6],vid[7],vid[8],vid[9])
+
+                    video.muestra()
+
+
+            elif op == 3:
+                        
+                titulo = validacion.Pide("indica titulo : ",1,30,"SI","").como_cadena()
+
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+
+
+                bandera =arch.busca(titulo,1)
+
+                if bandera == False:
+                    print("no hay video con ese titulo : ")
+
+                
+
+            elif op == 4:
+                genero = validacion.Pide("indica genero : ",1,15,"SI","").como_cadena()
+
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+               
+
+                bandera = arch.busca(genero,2)
+
+                if bandera == False:
+                    print("no hay video con ese genero")
+            elif op == 5:
+                print("___________LISTADO GENERAL________")
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+        
+                ad.Listados(arch.videos).general("general","","")
+            elif op == 6:
+                print("___________LISTADO PELICULAS________")
+                
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+        
+                ad.Listados(arch.videos).general("peliculas","","")
+            elif op == 7:
+                print("___________LISTADO SERIES________")
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+        
+                ad.Listados(arch.videos).general("series","","")
+
+            elif op == 8:
+                print("___________LISTADO DOCUMENTALES________")
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+        
+                ad.Listados(arch.videos).general("documentales","","")
+
+            elif op == 9:
+
+                print("___________LISTADO POR CALIFICACIONES_________")
+
+                cali_i = validacion.Pide("indica limite inferior de calificación : ",1,5,"SI","int").como_numero()
+                cali_s = validacion.Pide("indica limite superior de calificación : ",1,5,"SI","int").como_numero()
+
+                arch = ad.archivo()
+                arch.cargar_csv("testFile.csv")
+        
+                ad.Listados(arch.videos).general("calificaciones",cali_i,cali_s)                
+
+            elif op == 10:
                 quit()
 
     def agrega_video(self):
@@ -78,36 +164,7 @@ class listados():
             print(" VOLVIENDO AL MENÚ PRINCIPAL . . .")
             time.sleep(2.5)
 
+ 
 
-    def consulta_ID(self):
-        
-        pass
 
-    def consulta_titulo(self):
-        
-        pass
-
-    def consulta_genero(self):
-        
-        pass
-
-    def listado_general(self):
-        
-        pass
-
-    def listado_peliculas(self):
-        
-        pass
-
-    def listado_series(self):
-        
-        pass
-
-    def listado_documentales(self):
-        
-        pass
-
-    def listado_calificaciones(self):
-        
-        pass
 
