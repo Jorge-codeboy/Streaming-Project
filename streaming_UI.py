@@ -55,7 +55,9 @@ class listados():
 
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
-
+                print("################################################################")
+                print("#__________________________CONSULTA POR ID_____________________#")
+                print("################################################################","\n") 
                 bandera,vid = arch.busca(ID,0)
 
                 if bandera == False:
@@ -74,11 +76,19 @@ class listados():
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
 
+                print("####################################################################")
+                print("#__________________________CONSULTA POR TÍTULO_____________________#")
+                print("####################################################################","\n")               
 
-                bandera =arch.busca(titulo,1)
+
+                bandera,videos = ad.Listados(arch.videos).general("consulta_l",titulo,1)
 
                 if bandera == False:
                     print("no hay video con ese titulo : ")
+
+                else:
+                    for vid in videos:
+                        print (vid)
 
                 
 
@@ -87,51 +97,79 @@ class listados():
 
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
-               
+                print("####################################################################")
+                print("#__________________________CONSULTA POR GÉNERO_____________________#")
+                print("####################################################################","\n")               
 
-                bandera = arch.busca(genero,2)
+                bandera,videos = ad.Listados(arch.videos).general("consulta_l",genero,2)
 
                 if bandera == False:
                     print("no hay video con ese genero")
+
+                else:
+                    for vid in videos:
+                        print (vid)                    
             elif op == 5:
-                print("___________LISTADO GENERAL________")
+                print("################################################################")
+                print("#__________________________LISTADO GENERAL_____________________#")
+                print("################################################################","\n")
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
         
-                ad.Listados(arch.videos).general("general","","")
+                videos =ad.Listados(arch.videos).general("general","","")
+
+                for vid in videos:
+                    print(vid)
             elif op == 6:
-                print("___________LISTADO PELICULAS________")
+                print("#####################################################################")
+                print("#__________________________LISTADO DE PELICULAS_____________________#")
+                print("#####################################################################","\n")
                 
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
         
-                ad.Listados(arch.videos).general("peliculas","","")
+                videos = ad.Listados(arch.videos).general("peliculas","","")
+                
+
+                for vid in videos:
+                    print(vid)                
             elif op == 7:
-                print("___________LISTADO SERIES________")
+                print("###############################################################")
+                print("#__________________________LISTADO SERIES_____________________#")
+                print("###############################################################","\n")
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
         
-                ad.Listados(arch.videos).general("series","","")
+                videos =ad.Listados(arch.videos).general("series","","")
+
+                for vid in videos:
+                    print(vid)                    
 
             elif op == 8:
-                print("___________LISTADO DOCUMENTALES________")
+                print("#####################################################################")
+                print("#__________________________LISTADO DOCUMENTALES_____________________#")
+                print("#####################################################################","\n")
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
         
-                ad.Listados(arch.videos).general("documentales","","")
+                videos = ad.Listados(arch.videos).general("documentales","","")
+                for vid in videos:
+                    print(vid)    
 
             elif op == 9:
-
-                print("___________LISTADO POR CALIFICACIONES_________")
 
                 cali_i = validacion.Pide("indica limite inferior de calificación : ",1,5,"SI","int").como_numero()
                 cali_s = validacion.Pide("indica limite superior de calificación : ",1,5,"SI","int").como_numero()
 
                 arch = ad.archivo()
                 arch.cargar_csv("testFile.csv")
+                print("#########################################################################")
+                print("#__________________________LISTADO POR CALIFICACIÓN_____________________#")
+                print("#########################################################################","\n")
         
-                ad.Listados(arch.videos).general("calificaciones",cali_i,cali_s)                
-
+                videos = ad.Listados(arch.videos).general("calificaciones",cali_i,cali_s)                
+                for vid in videos:
+                    print(vid)    
             elif op == 10:
                 quit()
 

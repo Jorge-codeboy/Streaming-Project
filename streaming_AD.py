@@ -84,7 +84,7 @@ class archivo():
                 try:
 
                     if atributo in video[posicion]:    
-                        print(video)
+                        vid=video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]
                         bandera_existe=True
                         
 
@@ -96,7 +96,7 @@ class archivo():
             
 
                 
-            return(bandera_existe)
+            return(bandera_existe,vid)
     
 
         
@@ -108,7 +108,30 @@ class Listados():
         
         
 
-    def general(self, tipo, ci,cs):
+    def general(self, tipo, p1,p2):
+        vids=[]
+        bandera_existe = False
+
+        if tipo == "consulta_l":
+
+            for video in self.videos:
+
+                try:
+
+                    if p1 in video[p2]:    
+                        vid="["+video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]+"]"
+                        bandera_existe=True
+                        vids.append(vid)
+
+                        
+
+                except:
+                    pass
+
+            
+
+                
+            return(bandera_existe,vids)
         
 
         
@@ -125,12 +148,17 @@ class Listados():
                 try:
 
                     if "P" in video[0] or "S" in video[0] or "D" in video[0]:    
-                        print(video)
+                        vid="["+video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]+"]"
+                        vids.append(vid)
                         
                         
 
                 except:
                     pass
+
+            return(vids)
+
+                
             
         if tipo == "peliculas" :
 
@@ -139,18 +167,21 @@ class Listados():
            
 
             for video in self.videos:
-                print(video)
+                
 
                  
                 try:
 
-                    if "P" in video[0]:    
-                        print(video)
+                    if "P" in video[0][0]:
+
+                        vid="["+video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]+"]"
+                        vids.append(vid)
                         
 
                 except:
                     pass
-                
+
+            return(vids)    
 
         if tipo == "series":
 
@@ -159,11 +190,13 @@ class Listados():
                 try:
 
                     if "S" in video[0]:    
-                        print(video)
-                        
 
+
+                        vid="["+video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]+"]"
+                        vids.append(vid)
                 except:
                     pass
+            return(vids)
 
         if tipo == "documentales":
 
@@ -171,9 +204,9 @@ class Listados():
 
                 try:
 
-                    if "D" in video[0]:    
-                        print(video)
-
+                    if "D" in video[0][0]:    
+                        vid="["+video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]+"]"
+                        vids.append(vid)
                         
 
 
@@ -181,24 +214,24 @@ class Listados():
 
                 except:
                     pass
+            return(vids)
         if tipo == "calificaciones":
 
             for video in self.videos:
 
-                x = range(ci,cs+1)
+                x = range(p1,p2+1)
                 
 
                 try:
 
 
                     if  int(video[4]) in x:
-
-                        print(video)
-                        
+                        vid="["+video[0]+","+video[1][0:16]+","+video[2]+","+video[3]+","+video[4]+","+video[5]+","+video[6]+","+video[7]+","+video[8]+","+video[9][0:16]+"]"
+                        vids.append(vid)
 
                 except:
                     pass
-
+            return(vids)
       
 
 
