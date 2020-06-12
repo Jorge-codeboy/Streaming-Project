@@ -17,8 +17,8 @@ class listados():
 
         while True:
             
-            #ws.PlaySound("somebody", ws.SND_ASYNC)
-            #os.system('cls')
+            ws.PlaySound("netflix", ws.SND_ASYNC)
+            os.system('cls')
 
             print('''
 ###############################################
@@ -45,166 +45,148 @@ class listados():
 ############################################### ''')
         
             op = validacion.Pide('\n' + "Tu opción > ", 1, 10,"SI","int").como_numero()
+            os.system('cls')
 
             if op == 1:
-                self.agrega_video()
-                print("TERMINE")
+                arch = ad.Archivo()
+                arch.cargar_csv("videos.csv")
+                video = ac.Documental("", "", "", "", "", "", "", "", "", "")
+                video.pide_datos()
+                existe,vid = arch.busca(video.ID)
+
+                if not existe:
+                    op =validacion.Pide('\n' + " [¿¿¿] ESTÁ SEGURO QUE DESEA AÑADIR " + str(video.ID) + " [???] " +
+                    '\n' + "    1 PARA ACEPTAR | 0 PARA ABORTAR" + '\n' + "> ", 0, 1, "", "int").como_numero()
+                    
+                    if op == 1:
+
+                        video_str = str(video)
+                        arch.graba(video_str, "videos.csv")
+                        os.system("cls")
+                        ws.PlaySound("arreLulu", ws.SND_ASYNC)
+
+                        print('''
+                        \|/ ____ \|/       
+                         @~/ .. \~@        
+                        /_( \__/ )_\      ¡ R E G I S T R O   E X I T O S O !
+                           \____/    
+                        ''')
+                        time.sleep(4)
+                else:
+                    validacion.Pide("El ID se duplica en la base de datos").error()
+                    input("[ENTER] para continuar")                                                      
 
             elif op == 2:
-                ID = validacion.Pide("indica ID : ",5,5,"SI","").como_cadena()
+                ID = validacion.Pide("---Indica ID > ",5,5,"SI","").como_cadena()
+                ID = ID.upper()
 
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-                print("################################################################")
-                print("#__________________________CONSULTA POR ID_____________________#")
-                print("################################################################","\n") 
-                bandera,vid = arch.busca(ID,0)
+                arch = ad.Archivo()
+                arch.cargar_csv("videos.csv")
+                bandera,vid = arch.busca(ID)
 
                 if bandera == False:
-                    print("no hay video con ese ID")
+                    validacion.Pide("No existe video con ese ID").error()
                 else:
                     
                     video = ac.Documental(vid[0],vid[1],vid[3],vid[4],vid[5],vid[2],vid[6],vid[7],vid[8],vid[9])
-
+                    print('\n' + "#"*50 + "\n")
                     video.muestra()
+                print('\n' + "#"*50 + "\n")
+                input("[ENTER] Para continuar.")
 
+            elif op == 3 or op == 4:
+                valor_a_buscar = ""
+                posicion = 0
 
-            elif op == 3:
-                        
-                titulo = validacion.Pide("indica titulo : ",1,30,"SI","").como_cadena()
+                if op == 3: 
+                    valor_a_buscar = "título"
+                    posicion = 1
+                elif op == 4:
+                    valor_a_buscar = "género"
+                    posicion = 2
+       
+                valor_a_buscar = validacion.Pide("Indica " + str(valor_a_buscar) + " > ",1, 30, "SI", "").como_cadena()
 
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
+                if valor_a_buscar == "Shrek":
+                    ws.PlaySound("somebody", ws.SND_ASYNC)
 
-                print("####################################################################")
-                print("#__________________________CONSULTA POR TÍTULO_____________________#")
-                print("####################################################################","\n")               
-
-
-                bandera,videos = ad.Listados(arch.videos).general("consulta_l",titulo,1)
-
+                arch = ad.Archivo()
+                arch.cargar_csv("videos.csv")
+                bandera,videos = ad.Listados(arch.videos).general(valor_a_buscar, posicion)
+                
                 if bandera == False:
-                    print("no hay video con ese titulo : ")
+                    validacion.Pide("No existe video con ese Título").error()
 
                 else:
-                    for vid in videos:
-                        print (vid)
+                        sentence = ""
+                        print(" ID    TÍTULO           DUR CAL GÉNERO           AUDIENCIA        TEMP/EPIS TIT.EPISODIO     TEMA             ")
+                        print("--------------------------------------------------------------------------------------------------------------")
+                        for vid in videos:
+                            sentence +=  " " + vid[0] + " " + vid[1][0:16] + (16-len(vid[1]))*" " + " " + vid[3] + ((3-len(vid[3]))*" ") + "  " + \
+                            vid[4] +  "  " + vid[2][0:16] + (16-len(vid[2]))*" " + " " + vid[5][0:16] + (16-len(vid[5]))*" " + " " + \
+                            vid[6] + (4-len(vid[6]))*" " + "/" + vid[7] + (4-len(vid[7]))*" " + " " + vid[8][0:16] + (16-len(vid[8]))*" " + " " + \
+                            vid[9][0:16] + (16-len(vid[9]))*" " + " " + '\n'    
+                         
+                        print(sentence)
+                print('\n' + "#"*52 + "\n")
+                input("[ENTER] Para continuar.")
 
+            elif op == 5 or op == 6 or op == 7 or op == 8:
+                valor_a_buscar = ""
+                if op == 5: valor_a_buscar = ""
+                elif op == 6: valor_a_buscar = "P"
+                elif op == 7: valor_a_buscar = "S"
+                elif op == 8: valor_a_buscar = "D"
                 
-
-            elif op == 4:
-                genero = validacion.Pide("indica genero : ",1,15,"SI","").como_cadena()
-
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-                print("####################################################################")
-                print("#__________________________CONSULTA POR GÉNERO_____________________#")
-                print("####################################################################","\n")               
-
-                bandera,videos = ad.Listados(arch.videos).general("consulta_l",genero,2)
-
+                arch = ad.Archivo()
+                arch.cargar_csv("videos.csv")
+                bandera,videos = ad.Listados(arch.videos).general(valor_a_buscar, 0)
+                
                 if bandera == False:
-                    print("no hay video con ese genero")
+                    validacion.Pide("No hay registros").error()
 
                 else:
-                    for vid in videos:
-                        print (vid)                    
-            elif op == 5:
-                print("################################################################")
-                print("#__________________________LISTADO GENERAL_____________________#")
-                print("################################################################","\n")
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-        
-                videos =ad.Listados(arch.videos).general("general","","")
-
-                for vid in videos:
-                    print(vid)
-            elif op == 6:
-                print("#####################################################################")
-                print("#__________________________LISTADO DE PELICULAS_____________________#")
-                print("#####################################################################","\n")
-                
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-        
-                videos = ad.Listados(arch.videos).general("peliculas","","")
-                
-
-                for vid in videos:
-                    print(vid)                
-            elif op == 7:
-                print("###############################################################")
-                print("#__________________________LISTADO SERIES_____________________#")
-                print("###############################################################","\n")
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-        
-                videos =ad.Listados(arch.videos).general("series","","")
-
-                for vid in videos:
-                    print(vid)                    
-
-            elif op == 8:
-                print("#####################################################################")
-                print("#__________________________LISTADO DOCUMENTALES_____________________#")
-                print("#####################################################################","\n")
-                
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-        
-                videos = ad.Listados(arch.videos).general("documentales","","")
-                for vid in videos:
-                    print(vid)    
-
+                        sentence = ""
+                        print(" ID    TÍTULO           DUR CAL GÉNERO           AUDIENCIA        TEMP/EPIS TIT.EPISODIO     TEMA             ")
+                        print("--------------------------------------------------------------------------------------------------------------")
+                        for vid in videos:
+                            sentence +=  " " + vid[0] + " " + vid[1][0:16] + (16-len(vid[1]))*" " + " " + vid[3] + ((3-len(vid[3]))*" ") + "  " + \
+                            vid[4] +  "  " + vid[2][0:16] + (16-len(vid[2]))*" " + " " + vid[5][0:16] + (16-len(vid[5]))*" " + " " + \
+                            vid[6] + (4-len(vid[6]))*" " + "/" + vid[7] + (4-len(vid[7]))*" " + " " + vid[8][0:16] + (16-len(vid[8]))*" " + " " + \
+                            vid[9][0:16] + (16-len(vid[9]))*" " + " " + '\n'     
+                        print(sentence)
+                print('\n' + "#"*52 + "\n")
+                input("[ENTER] Para continuar.")
+            
             elif op == 9:
 
                 cali_i = validacion.Pide("indica limite inferior de calificación : ",1,5,"SI","int").como_numero()
                 cali_s = validacion.Pide("indica limite superior de calificación : ",1,5,"SI","int").como_numero()
 
-                arch = ad.archivo()
-                arch.cargar_csv("testFile.csv")
-                print("#########################################################################")
-                print("#__________________________LISTADO POR CALIFICACIÓN_____________________#")
-                print("#########################################################################","\n")
-        
-                videos = ad.Listados(arch.videos).general("calificaciones",cali_i,cali_s)                
-                for vid in videos:
-                    print(vid)    
+                
+
+                arch = ad.Archivo()
+                arch.cargar_csv("videos.csv")
+                bandera,videos = ad.Listados(arch.videos).general("", 4,cali_i,cali_s)
+                
+                if bandera == False:
+                    validacion.Pide("No hay registros").error()
+
+                else:
+                        sentence = ""
+                        print(" ID    TÍTULO           DUR CAL GÉNERO           AUDIENCIA        TEMP/EPIS TIT.EPISODIO     TEMA             ")
+                        print("--------------------------------------------------------------------------------------------------------------")
+                        for vid in videos:
+                            sentence +=  " " + vid[0] + " " + vid[1][0:16] + (16-len(vid[1]))*" " + " " + vid[3] + ((3-len(vid[3]))*" ") + "  " + \
+                            vid[4] +  "  " + vid[2][0:16] + (16-len(vid[2]))*" " + " " + vid[5][0:16] + (16-len(vid[5]))*" " + " " + \
+                            vid[6] + (4-len(vid[6]))*" " + "/" + vid[7] + (4-len(vid[7]))*" " + " " + vid[8][0:16] + (16-len(vid[8]))*" " + " " + \
+                            vid[9][0:16] + (16-len(vid[9]))*" " + " " + '\n'     
+                        print(sentence)
+                print('\n' + "#"*52 + "\n")
+                input("[ENTER] Para continuar.")
+
+  
             elif op == 10:
                 quit()
 
-    def agrega_video(self):
-
-        arch = ad.archivo()
-        arch.cargar_csv("testFile.csv")
-        video = ac.Documental("", "", "", "", "", "", "", "", "", "")
-        video.pide_datos()
-        existe,vid = arch.busca(video.ID, 0)
-        print(existe)
-
-        if not existe:
-            op =validacion.Pide('\n' + " [¿¿¿] ESTÁ SEGURO QUE DESEA AÑADIR " + str(video.ID) + " [???] " +
-            '\n' + "    1 PARA ACEPTAR | 0 PARA ABORTAR" + '\n' + "> ", 0, 1, "", "int").como_numero()
-            
-            if op == 1:
-                video_str = str(video)
-                print(video_str)
-                arch.graba(video_str, "testFile.csv")
-                os.system("cls")
-                print('''
-               \|/ ____ \|/       
-                @~/ .. \~@        
-               /_( \__/ )_\      ¡ R E G I S T R O   E X I T O S O !
-                  \____/    
-                ''')
-                time.sleep(2.5)
-        else:
-            validacion.Pide("El ID se duplica en la base de datos").error()
-            print(" VOLVIENDO AL MENÚ PRINCIPAL . . .")
-            time.sleep(2.5)
-
- 
-
-
-
+  

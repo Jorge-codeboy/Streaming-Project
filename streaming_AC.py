@@ -12,7 +12,6 @@ class Videos():
         while True:
             ID = validacion.Pide("Indica el ID > ", 5, 5, "SI", "").como_cadena()
             ID = ID.upper()
-
             if ID[0] != "P" and ID[0] != "D" and ID[0] != "S":
                 validacion.Pide("Solo puede iniciar con P (Películas), S (Series) o D (Documentales)").error()
             elif ID[1] != "A" and ID[1] != "B" and ID[1] != "C" and ID[1] != "D":
@@ -25,8 +24,8 @@ class Videos():
 
         self.titu = validacion.Pide("---Indica el titulo     > ", 1, 30, "SI", "").como_cadena()
         self.dura = validacion.Pide("---Indica la duración   > ", 1, 500, "SI", "int").como_numero()
-        self.cali = validacion.Pide("---Indica la calificacion> ", 1, 5, "SI", "int").como_numero()
-        
+        self.cali = validacion.Pide("---Indica la calificacion > ", 1, 5, "SI", "int").como_numero()
+
     def muestra(self):
         if self.ID != "" and self.titu != "" and self.dura != "" and self.cali != "":
             print("ID              : ", self.ID)
@@ -36,7 +35,7 @@ class Videos():
 
     def __str__(self):
         
-        cad = self.ID +","+ self.titu +"," + str(self.gene) + ", " + str(self.dura) +","+ str(self.cali) + ","
+        cad = self.ID +","+ self.titu +"," + str(self.gene).strip() + "," + str(self.dura).strip() +","+ str(self.cali).strip() + ","
 
         return(cad)
 
@@ -90,7 +89,7 @@ class Serie(Peliculas):
 
     def __str__(self):
 
-        cad= str(self.temp) + "," + str(self.epis) + "," + self.titE + ","
+        cad= str(self.temp).strip() + "," + str(self.epis).strip() + "," + self.titE + ","
 
         
         return (super().__str__()+cad)

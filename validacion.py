@@ -1,3 +1,5 @@
+import winsound
+
 class Pide():
     def __init__(self, letrero, li = 0, ls = 0, ciclo = "", tipo = ""):
         self.letrero = letrero
@@ -10,6 +12,7 @@ class Pide():
         pass
 
     def error(self):
+        winsound.PlaySound("eeeee",winsound.SND_ASYNC)
         print('\n' + " [!!!] ERROR [!!!]")
         print(" " +self.letrero + ". . . " + '\n' + " Intente de nuevo." + '\n')
 
@@ -51,12 +54,3 @@ class Pide():
                         del mer
                     else: return num
                 else: return num
-
-# Termina la clase Pide
-
-#Pide1 = Pide("Indica tu nombre : ", ciclo = "si", li = 3, ls = 10)
-#cad = Pide1.pide_cadena()
-#print("Cadena =", cad)
-#pn1 = Pide("Indica un número : ", tipo = "int", li = 5, ls = 10, ciclo = "si")
-#x = pn1.pide_numero()
-#print("x=",x)
