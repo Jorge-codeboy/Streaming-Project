@@ -71,7 +71,7 @@ class listados():
                         /_( \__/ )_\      ¡ R E G I S T R O   E X I T O S O !
                            \____/    
                         ''')
-                        time.sleep(4)
+                        input("[ENTER] para continuar")  
                 else:
                     validacion.Pide("El ID se duplica en la base de datos").error()
                     input("[ENTER] para continuar")                                                      
